@@ -11,6 +11,21 @@ $(document).ready(function () {
         }
         return c;
     }
+    function iconMenu(o, text) {
+        return $('<div>', { id: '', class: '', text: '' }).append(
+            text && $('<div>', { id: '', class: 'df mb25', text: 'LIBRARY' }),
+            o.map(function (d, i) {
+                return $('<div>', { id: '', class: 'df mb25 bấmĐc', text: '' }).append(
+                    $('<div>', { id: '', class: 'w20', text: '' }).append(
+                        $('<div>', { id: '', class: d.i + " fs11 c08 chk1h ta5", text: '' }),
+                    ),
+                    $('<div>', { id: '', class: 'w60 c08 chk1h ta5', text: d.t }),
+                    d.n && $('<div>', { id: '', class: 'w20 tar pr10', text: d.n }),
+                    d.e ?? ""
+                )
+            })
+        )
+    }
     $.fn.extend({
         hoverB: function (o) {
             o = $.extend({
@@ -21,12 +36,13 @@ $(document).ready(function () {
                 right: "",
                 top: "",
                 bottom: "",
-                thờiGian: "0.5s",
+                thờiGian: 500,
+                đốiTượng: false,
                 nộiDung: $('<div>', { id: '', class: 'pa bgcf pa5', text: 'điền nội dung vào đây' }),
             }, o)
             return this.each(function () {
-                var t = $(this), t1, css1, css2;
-                o.nộiDung.css({ transition: o.thờiGian, position: "absolute" })
+                var t = $(this), css1, css2;
+                o.nộiDung.css({ position: "absolute" })
                 switch (o.hướng) {
                     case "bottom":
                         css1 = {
@@ -44,46 +60,68 @@ $(document).ready(function () {
                             opacity: 1
                         }
                         break;
+                    case "right":
+                        css1 = {
+                            top: o.top ?? "",
+                            bottom: o.bottom,
+                            left: o.left ?? "",
+                            right: o.từ,
+                            opacity: 0
+                        };
+                        css2 = {
+                            top: o.top ?? "",
+                            bottom: o.bottom,
+                            left: o.left ?? "",
+                            right: o.đến,
+                            opacity: 1
+                        }
+                        break;
                 }
-                t.hover(function () {
+                o.nộiDung.addClass("chờXóa");
+                t.on("mouseenter", o.đốiTượng, function () {
+                    var t = $(this);
                     t.append(
                         o.nộiDung.css(css1)
                     )
+
                     setTimeout(function () {
                         o.nộiDung.css(css2)
                     }, 50)
-                }, function () {
-                    o.nộiDung.css(css1)
-                    setTimeout(function () {
-                        o.nộiDung.remove();
-                    }, o.thờiGian);
-                })
+                    var event = {
+                        mouseleave: function () {
+                            o.nộiDung.css(css1)
+                            setTimeout(function () {
+                                t.find(".chờXóa").remove();
+                                t.off(event)
+                            }, o.thờiGian);
+                        }
+                    };
+                    t.on(event)
+                },
+                )
+                // t.hover(function () {
+                //     t.append(
+                //         o.nộiDung.css(css1)
+                //     )
+                //     setTimeout(function () {
+                //         o.nộiDung.css(css2)
+                //     }, 50)
+                // }, function () {
+                //     o.nộiDung.css(css1)
+                //     setTimeout(function () {
+                //         o.nộiDung.remove();
+                //     }, o.thờiGian);
+                // })
             })
         }
     })
     $("body").prepend(
         $('<div>', { id: '', class: '', text: '' }).append(
-
             $('<div>', { id: 'header', class: '', text: '' }).append(
                 //thanh 1
                 $('<div>', { id: '', class: 'thanh1 dibc ptb25 plr15 bb1 bss bchk', text: '' }).append(
                     $('<div>', { id: '', class: 'w33 dibc', text: '' }).append(
-                        $('<div>', { id: '', class: 'fas fa-bars h1 fs15 vatb bấmĐc', text: '' }).on("click", function () {
-                            function iconMenu(o, text) {
-                                return $('<div>', { id: '', class: '', text: '' }).append(
-                                    text && $('<div>', { id: '', class: 'df mb25', text: 'LIBRARY' }),
-                                    o.map(function (d, i) {
-                                        return $('<div>', { id: '', class: 'df mb25 bấmĐc', text: '' }).append(
-                                            $('<div>', { id: '', class: 'w20', text: '' }).append(
-                                                $('<div>', { id: '', class: d.i + " fs11 c08 chk1h ta5", text: '' }),
-                                            ),
-                                            $('<div>', { id: '', class: 'w60 c08 chk1h ta5', text: d.t }),
-                                            d.n && $('<div>', { id: '', class: 'w20 tar pr10', text: d.n }),
-                                        )
-                                    })
-                                )
-
-                            }
+                        $('<div>', { id: '', class: 'fas fa-bars h1 fs15 vatb bấmĐc', text: '' }).on("click", function (e) {
                             var t = $(this),
                                 menu = $('<div>', { id: '', class: 'pf l0 b0 wmx3 bgcf z99 fs1 oya menuDọc ta5', text: '' }).css({
                                     width: "300px",
@@ -198,7 +236,6 @@ $(document).ready(function () {
                                     ),
                                     $('<div>', { id: '', class: 'bb1 bss bchk ptb25 pl40 pr15', text: '' })
                                 );
-
                             if (!$("body").find(".menuDọc").length) {
                                 t.addClass("pen")
                                 $("body").append(menu)
@@ -236,9 +273,80 @@ $(document).ready(function () {
                         $('<div>', { id: '', class: 'far fa-comment-dots fs15 mlr10 h1 vatb', text: '' }),
                         $('<div>', { id: '', class: 'far fa-bell fs15 mlr10  h1 vatb', text: '' }),
                         $('<div>', { id: '', class: 'pr h1 ', text: '' }).css({ width: "50px" }).append(
-                            $('<div>', { id: '', class: 'pa l0 wh50 bra50 bgc9', text: '' }).css({ top: "-35px" }),
+                            $('<div>', { id: '', class: 'pa l0 wh50 bra50 bgc9 bấmĐc', text: '' }).css({ top: "-35px" }).append(
+                                $('<div>', { id: '', class: 'pr wh1', text: '' }).on("click", function () {
+                                    var t = $(this), h,
+                                        menuAc = $('<div>', { id: '', class: 'pa t1 r0 bgcfa tal o0 menuAc', text: '' }).append(
+                                            $('<div>', { id: '', class: 'pt25', text: '' }).css({
+                                                width: "300px"
+                                            }).append(
+                                                $('<div>', { id: '', class: 'plr25 dibc', text: '' }).append(
+                                                    $('<div>', { id: '', class: 'pl10', text: 'AZYRUSMAX' }),
+                                                    $('<div>', { id: '', class: 'fs08 pa3 ml15 cf', text: 'PRO' }).css({ background: "#74ca74" }),
+                                                ),
+                                                $('<div>', { id: '', class: 'bb1 bss bchk ptb25 pl40 pr15', text: '' }).append(
+                                                    iconMenu([{
+                                                        i: "far fa-user ",
+                                                        t: "My Channel "
+                                                    }, {
+                                                        i: "fas fa-dollar-sign",
+                                                        t: "Paid subscriptions"
+                                                    },
+                                                    {
+                                                        i: "fas fa-cog",
+                                                        t: "Settings"
+                                                    }, {
+                                                        i: "fas fa-sign-out-alt",
+                                                        t: "Sign out"
+                                                    },])
+                                                ),
+                                                $('<div>', { id: '', class: 'bb1 bss bchk ptb25 pl40 pr15', text: '' }).append(
+                                                    iconMenu([{
+                                                        i: "far fa-lightbulb",
+                                                        t: "Dark theme",
+                                                        e: $('<div>', { id: '', class: '	fas fa-toggle-off tar', text: '' }),
+                                                    }, {
+                                                        i: "fas fa-language",
+                                                        t: "Language"
+                                                    },
+                                                    {
+                                                        i: "far fa-comment-dots",
+                                                        t: "Send Feedback"
+                                                    }, {
+                                                        i: "fas fa-location-arrow",
+                                                        t: "india",
+                                                        e: $('<div>', { id: '', class: 'fas fa-angle-right vab fs12', text: '' }),
+                                                    },])
+                                                ),
+                                                $('<div>', { id: '', class: 'bb1 bss bchk pt25 pl40 pr15', text: '' }).append(
+                                                    iconMenu([{
+                                                        i: "far fa-lightbulb",
+                                                        t: "Dark theme",
+                                                        e: $('<div>', { id: '', class: 'fas fa-toggle-off tar', text: '' }),
+                                                    }])
+                                                ),
+                                            )
+                                        );
+                                    if (t.find(".menuAc").length) {
+                                        var g = t.find(".menuAc");
+                                        g.css({marginTop: "0px"})
+                                        g.height(0);
+                                        setTimeout(function () {
+                                            g.remove();
+                                        }, 500)
+                                    } else {
+                                        t.append(menuAc)
+                                        h = menuAc.height();
+                                        menuAc.height(0).removeClass("o0").addClass("oh ta5");
+                                        setTimeout(function () {
+                                            menuAc.height(h)
+                                            menuAc.css({marginTop: "25px"})
+                                        })
+                                    }
+                                }),
+                            ),
                         ),
-                        $('<div>', { id: '', class: 'fas fa-chevron-down fs1 mlr10  h1 vatb', text: '' }),
+                        $('<div>', { id: '', class: 'fas fa-chevron-down fs1 mlr10  h1 vatb bấmĐc', text: '' }),
                         $('<div>', { id: '', class: 'btn-ha bg0 bấmĐc', text: 'Upload' }).css({
                             width: "110px",
                             height: "35px"
@@ -251,38 +359,35 @@ $(document).ready(function () {
                         return $('<div>', { id: '', class: 'fs1 ptb25 plr10 bấmĐc  c08 chk1h ta5 pr', text: v }).each(function () {
                             $(this).text() == "Pages" && $(this).hoverB({
                                 left: "10px",
-                                nộiDung: $('<div>', { id: '', class: 'bgcf c07 dibc', text: '' }).css({
+                                nộiDung: $('<div>', { id: '', class: 'bgcf c07 dibc ta5', text: '' }).css({
                                     width: "600px"
                                 }).append(
-                                    ["Homepage,", "Single Video Page", "Single Video Simplified Page", "Singel Video Full Width Page", "Single Video Playlist Page", "Upload Video Page", "Upload Video Edit Page", "Browse Channels Page", "Searched Videos Page", "Single Channel", "History Page", "Browse Categories Page", "Updates From Subscription Page", "Login Page", "Signup Page", "User Account Page",].map(function (v) {
-                                        return $('<div>', { id: '', class: 'bb1 bss bchk col-xs-6 ptb15 plr25', text: v }).each(function () {
-                                            var t = $(this);
-                                            if (t.text() == "Single Video Page") {
-                                                t.addClass("pr").hoverB({
-                                                    hướng: "bottom",
-                                                    từ: "150%",
-                                                    đến: "0%",
-                                                    left: "100%",
-                                                    nộiDung: $('<div>', { id: '', class: 'bgcf c07 dibc', text: '' }).css({
-                                                        width: "300"
-                                                    }).append(
-                                                        ["Single Channel Home Page",
-                                                            "Single Channel Videos Page",
-                                                            "Single Channel Playlist Page",
-                                                            "Single Channel Channels Page",
-                                                            "Single Channel About Page",
-                                                            "Single Channel Products Page",].map(function (v) {
-                                                                return $('<div>', { id: '', class: 'bb1 bss bchk ptb15 plr25', text: v })
-                                                            })
-                                                    )
-
-                                                })
-                                            }
-                                        })
+                                    ["Homepage,", "Single Video Page", "Single Video Simplified Page", "Singel Video Full Width Page", "Single Video Playlist Page", "Upload Video Page", "Upload Video Edit Page", "Browse Channels Page", "Searched Videos Page", "Single Channel", "History Page", "Browse Categories Page", "Updates From Subscription Page", "Login Page", "Signup Page", "User Account Page",].map(function (v, i) {
+                                        return $('<div>', { id: '', class: 'bb1 bss bchk col-xs-6 ptb15 plr25 ' + (v == 'Single Video Page' ? 'singleMn' : ''), text: v });
                                     }),
                                 ),
                             })
+                            $(this).hoverB({
+                                hướng: "bottom",
+                                từ: "150%",
+                                đến: "0%",
+                                left: "100%",
+                                đốiTượng: ".singleMn",
+                                nộiDung: $('<div>', { id: '', class: 'bgcf c07 dibc ta5', text: '' }).css({
+                                    width: "300"
+                                }).append(
+                                    ["Single Channel Home Page",
+                                        "Single Channel Videos Page",
+                                        "Single Channel Playlist Page",
+                                        "Single Channel Channels Page",
+                                        "Single Channel About Page",
+                                        "Single Channel Products Page",].map(function (v) {
+                                            return $('<div>', { id: '', class: 'bb1 bss bchk ptb15 plr25', text: v })
+                                        })
+                                )
+                            })
                         })
+
                     }),
                     $('<div>', { id: '', class: 'mt25 ml15 dibc', text: '' }).append(
                         $('<div>', { id: '', class: 'fs1  plr10 ta5', text: "Go to:" }),
@@ -342,6 +447,7 @@ $(document).ready(function () {
                             ),
                             $('<div>', { id: '', class: 'tac fs1 fwb mb15', text: v.title }),
                             $('<div>', { id: '', class: 'tac fs1 ', text: v.content }),
+
                         )
                     })
                 ),
@@ -470,35 +576,14 @@ $(document).ready(function () {
                         $("html, body").animate({ scrollTop: 0 }, "slow");
                     }),
                 ),
-            ).on("mouseenter", ".videoFake", function () {
-                var t = $(this);
-                $(this).append(
-                    $('<div>', { id: '', class: 'thờiGian bgc05 pa t0 r0 mt10 o0 ta5 cf bra3 pa5 fas fa-clock', text: '' }).each(function () {
-                        var t2 = $(this);
-                        setTimeout(function () {
-                            t2.css({
-                                right: "10px",
-                                opacity: 1
-                            })
-                        }, 50)
-                    }),
-                )
-                var event = {
-                    mouseleave: function () {
-                        var t1 = t.find(".thờiGian");
-                        t1.css({
-                            right: "0px",
-                            opacity: 0
-                        })
-                        setTimeout(function () {
-                            t1.remove()
-                        }, 300)
-                        t.off(event)
-                    }
-                };
-                t.on(event)
-            },
-            )
+            ).hoverB({
+                    hướng: "right",
+                    từ: "0px",
+                    đến: "10px",
+                    // left: "100%",
+                    đốiTượng: ".videoFake",
+                    nộiDung: $('<div>', { id: '', class: 'thờiGian bgc05 pa t0 r0 mt10 o0 ta5 cf bra3 pa5 fas fa-clock', text: '' })
+                })
         )
     )
 });
