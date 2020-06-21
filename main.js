@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    hackton = new function () {
+    hackthon = new function () {
         function cl(a, b, c) {
             (a || a == 0) && console.log(a);
             (b || b == 0) && console.log(b);
@@ -93,8 +93,8 @@ $(document).ready(function () {
                 })
             }
         })
-        var head = function () {
-            return $('<div>', { id: '', class: '', text: '' }).append(
+        this.head = head = function () {
+            return $('<div>', { id: '', class: 'ta5', text: '' }).append(
                 //thanh 1
                 $('<div>', { id: '', class: 'thanh1 dibc ptb25 plr15 bb1 bss bchk', text: '' }).append(
                     $('<div>', { id: '', class: 'w33 dibc', text: '' }).append(
@@ -249,6 +249,26 @@ $(document).ready(function () {
                     $('<div>', { id: '', class: 'w33 dibc tar ', text: '' }).append(
                         $('<div>', { id: '', class: 'far fa-comment-dots fs15 mlr10 h1 vatb', text: '' }),
                         $('<div>', { id: '', class: 'far fa-bell fs15 mlr10  h1 vatb', text: '' }),
+                        $('<div>', { id: '', class: 'plr15 bấmĐc', text: 'Sigin' }).on('click', function () {
+                            $(".bannerText").text("Sig In").removeClass("mb40").addClass("mb15").after(
+                                $('<div>', { id: '', class: 'cf', text: 'Please sign in to have access to all videos and many more.' }),
+                            )
+                            $(".bannerBtn").remove();
+                            $(".Banner").css({ padding: "150px 0px" })
+                            $(".content").empty().append(
+                                $('<div>', { id: '', class: 'container df jcsc pt50', text: '' }).append(
+                                    $('<div>', { id: '', class: 'col-xs-5 cb mt50', text: '' }).append(
+                                        $('<div>', { id: '', class: 'df jcsc', text: '' }).append(
+                                            $('<div>', { id: '', class: 'bgpc bgrn img ml25 bấmĐc' }).css({
+                                                backgroundImage: "url('img/logo.png')",
+                                                width: "70px",
+                                                height: "21px"
+                                            }),
+                                        ),
+                                    ),
+                                ),
+                            )
+                        }),
                         $('<div>', { id: '', class: 'pr h1 ', text: '' }).css({ width: "50px" }).append(
                             $('<div>', { id: '', class: 'pa l0 wh50 bra50 bgc9 bấmĐc', text: '' }).css({ top: "-35px" }).append(
                                 $('<div>', { id: '', class: 'pr wh1', text: '' }).on("click", function () {
@@ -329,7 +349,16 @@ $(document).ready(function () {
                             height: "35px"
                         }),
                     ),
-                ),
+                ).each(function () {
+                    var t = $(this);
+                    $(window).scroll(function () {
+                        if ($(this).scrollTop() > 5) {
+                            t.addClass("pf w1 bgcf z99")
+                        } else {
+                            t.removeClass("pf w1 bgcf z99")
+                        }
+                    })
+                }),
                 // thanh 2
                 $('<div>', { id: '', class: 'plr15 dibc', text: '' }).append(
                     ["Pages", "Categories", "Channels", "Trending", "LIVE", "Movies"].map(function (v) {
@@ -381,183 +410,183 @@ $(document).ready(function () {
 
                 ),
                 // banner
-                $('<div>', { id: '', class: ' bgc9', text: '' }).css({ padding: "200px 0px 200px 0px" }).append(
+                $('<div>', { id: '', class: 'Banner bgc9', text: '' }).css({ padding: "200px 0px 200px 0px" }).append(
                     $('<div>', { id: '', class: 'tac', text: '' }).append(
-                        $('<div>', { id: '', class: 'fwb fs25 cf mb40', text: 'Watch share and upload with friends' }),
-                        $('<div>', { id: '', class: 'plr25 bgcf bra15 dib bấmĐc', text: 'Create my account' }).css({
+                        $('<div>', { id: '', class: 'fwb fs25 cf mb40 bannerText', text: 'Watch share and upload with friends' }),
+                        $('<div>', { id: '', class: 'plr25 bgcf bra15 dib bấmĐc bannerBtn', text: 'Create my account' }).css({
                             lineHeight: "38px",
                             height: "38px"
                         }),
                     ),
                 ),
             )
-        },
-            home = function () {
-                return $('<div>', { id: '', class: 'content container', text: '' }).append(
-                    //khối 1
-                    $('<div>', { id: '', class: 'pt50 mt15 cb  bb1 bss bchk', text: '' }).css({
-                        paddingBottom: "100px"
-                    }).append(
-                        [{
-                            img: "img/sv1.png",
-                            title: "Get paid by your fans",
-                            content: "Accept money from your fans through tips."
-                        }, {
-                            img: "img/sv2.png",
-                            title: "Grow your audience",
-                            content: "Join a growing community of young millennialaas & get new fans."
-                        }, {
-                            img: "img/sv3.png",
-                            title: "Simple transfer from YouTube",
-                            content: "Upload your videos from YouTube with an easy link copy/paste."
-                        }, {
-                            img: "img/sv4.png",
-                            title: "Make money with Amazon",
-                            content: "Extra income through Amazon Affiliates on your channel."
-                        },].map(function (v, i) {
-                            return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 ', text: '' }).append(
-                                $('<div>', { id: '', class: 'w1 df jcsc mb25', text: '' }).append(
-                                    $('<div>', { id: '', class: 'w30 bấmĐc', text: '' }).append(
-                                        $('<div>', { id: '', class: 'img-11 bgsoi phóng' }).css({
-                                            backgroundImage: "url('" + v.img + "')"
-                                        }),
-                                    ),
+        };
+        this.home = home = function () {
+            return $('<div>', { id: '', class: 'container', text: '' }).append(
+                //khối 1
+                $('<div>', { id: '', class: 'pt50 mt15 cb  bb1 bss bchk', text: '' }).css({
+                    paddingBottom: "100px"
+                }).append(
+                    [{
+                        img: "img/sv1.png",
+                        title: "Get paid by your fans",
+                        content: "Accept money from your fans through tips."
+                    }, {
+                        img: "img/sv2.png",
+                        title: "Grow your audience",
+                        content: "Join a growing community of young millennialaas & get new fans."
+                    }, {
+                        img: "img/sv3.png",
+                        title: "Simple transfer from YouTube",
+                        content: "Upload your videos from YouTube with an easy link copy/paste."
+                    }, {
+                        img: "img/sv4.png",
+                        title: "Make money with Amazon",
+                        content: "Extra income through Amazon Affiliates on your channel."
+                    },].map(function (v, i) {
+                        return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 ', text: '' }).append(
+                            $('<div>', { id: '', class: 'w1 df jcsc mb25', text: '' }).append(
+                                $('<div>', { id: '', class: 'w30 bấmĐc', text: '' }).append(
+                                    $('<div>', { id: '', class: 'img-11 bgsoi phóng' }).css({
+                                        backgroundImage: "url('" + v.img + "')"
+                                    }),
                                 ),
-                                $('<div>', { id: '', class: 'tac fs1 fwb mb15', text: v.title }),
-                                $('<div>', { id: '', class: 'tac fs1 ', text: v.content }),
+                            ),
+                            $('<div>', { id: '', class: 'tac fs1 fwb mb15', text: v.title }),
+                            $('<div>', { id: '', class: 'tac fs1 ', text: v.content }),
 
+                        )
+                    })
+                ),
+                //khối 2
+                $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
+                    // paddingBottom: "100px"
+                }).append(
+                    $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Featured Videos' }),
+                    $('<div>', { id: '', class: 'cb', text: '' }).append(
+                        range(1, 8).map(function (d) {
+                            return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
+                                $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
+                                    $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
+                                ),
+                                $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
+                                $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
+                                    (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
+                                ),
+                                $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
+                                    $('<div>', { id: '', class: '', text: '686K views .' }),
+                                    $('<div>', { id: '', class: '', text: '1 week ago' }),
+                                ),
                             )
-                        })
+                        }),
                     ),
-                    //khối 2
-                    $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
-                        // paddingBottom: "100px"
-                    }).append(
-                        $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Featured Videos' }),
-                        $('<div>', { id: '', class: 'cb', text: '' }).append(
-                            range(1, 8).map(function (d) {
-                                return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
-                                    $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
-                                        $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
-                                    ),
-                                    $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
-                                    $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
-                                        (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
-                                    ),
-                                    $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
-                                        $('<div>', { id: '', class: '', text: '686K views .' }),
-                                        $('<div>', { id: '', class: '', text: '1 week ago' }),
-                                    ),
-                                )
-                            }),
-                        ),
-                    ),
-                    //khối 3
-                    $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
-                        // paddingBottom: "100px"
-                    }).append(
-                        $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Updates from Subscriptions' }),
-                        $('<div>', { id: '', class: 'cb', text: '' }).append(
-                            range(1, 4).map(function (d) {
-                                return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
-                                    $('<div>', { id: '', class: 'cb mb25', text: '' }).append(
-                                        $('<div>', { id: '', class: 'wh50 bra50 bgc9 fl', text: '' }),
-                                        $('<div>', { id: '', class: 'df jcsb pl25', text: '' }).css({ height: "50px" }).append(
-                                            $('<div>', { id: '', class: 'h1 df fdc jcsc', text: '' }).append(
-                                                $('<div>', { id: '', class: 'fwb', text: 'Tên ' + d }),
-                                            ),
-                                            $('<div>', { id: '', class: 'h1 df fdc jcsc', text: '' }).append(
-                                                $('<div>', { id: '', class: '', text: d }),
-                                            ),
+                ),
+                //khối 3
+                $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
+                    // paddingBottom: "100px"
+                }).append(
+                    $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Updates from Subscriptions' }),
+                    $('<div>', { id: '', class: 'cb', text: '' }).append(
+                        range(1, 4).map(function (d) {
+                            return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
+                                $('<div>', { id: '', class: 'cb mb25', text: '' }).append(
+                                    $('<div>', { id: '', class: 'wh50 bra50 bgc9 fl', text: '' }),
+                                    $('<div>', { id: '', class: 'df jcsb pl25', text: '' }).css({ height: "50px" }).append(
+                                        $('<div>', { id: '', class: 'h1 df fdc jcsc', text: '' }).append(
+                                            $('<div>', { id: '', class: 'fwb', text: 'Tên ' + d }),
+                                        ),
+                                        $('<div>', { id: '', class: 'h1 df fdc jcsc', text: '' }).append(
+                                            $('<div>', { id: '', class: '', text: d }),
                                         ),
                                     ),
-                                    $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
-                                        $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
-                                    ),
-                                    $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
-                                    $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
-                                        (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
-                                    ),
-                                    $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
-                                        $('<div>', { id: '', class: '', text: '686K views .' }),
-                                        $('<div>', { id: '', class: '', text: '1 week ago' }),
-                                    ),
-                                )
-                            }),
-                        ),
+                                ),
+                                $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
+                                    $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
+                                ),
+                                $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
+                                $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
+                                    (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
+                                ),
+                                $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
+                                    $('<div>', { id: '', class: '', text: '686K views .' }),
+                                    $('<div>', { id: '', class: '', text: '1 week ago' }),
+                                ),
+                            )
+                        }),
                     ),
-                    //khối 4
-                    $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
-                        // paddingBottom: "100px"
-                    }).append(
-                        $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'New Videos' }),
-                        $('<div>', { id: '', class: 'cb', text: '' }).append(
-                            range(1, 8).map(function (d) {
-                                return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
-                                    $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
-                                        $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
-                                    ),
-                                    $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
-                                    $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
-                                        (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
-                                    ),
-                                    $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
-                                        $('<div>', { id: '', class: '', text: '686K views .' }),
-                                        $('<div>', { id: '', class: '', text: '1 week ago' }),
-                                    ),
-                                )
-                            }),
-                        ),
+                ),
+                //khối 4
+                $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
+                    // paddingBottom: "100px"
+                }).append(
+                    $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'New Videos' }),
+                    $('<div>', { id: '', class: 'cb', text: '' }).append(
+                        range(1, 8).map(function (d) {
+                            return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
+                                $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
+                                    $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
+                                ),
+                                $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
+                                $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
+                                    (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
+                                ),
+                                $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
+                                    $('<div>', { id: '', class: '', text: '686K views .' }),
+                                    $('<div>', { id: '', class: '', text: '1 week ago' }),
+                                ),
+                            )
+                        }),
                     ),
-                    //khối 5
-                    $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
-                        // paddingBottom: "100px"
-                    }).append(
-                        $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Popular Videos' }),
-                        $('<div>', { id: '', class: 'cb', text: '' }).append(
-                            range(1, 8).map(function (d) {
-                                return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
-                                    $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
-                                        $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
-                                    ),
-                                    $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
-                                    $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
-                                        (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
-                                    ),
-                                    $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
-                                        $('<div>', { id: '', class: '', text: '686K views .' }),
-                                        $('<div>', { id: '', class: '', text: '1 week ago' }),
-                                    ),
-                                )
-                            }),
-                        ),
+                ),
+                //khối 5
+                $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
+                    // paddingBottom: "100px"
+                }).append(
+                    $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Popular Videos' }),
+                    $('<div>', { id: '', class: 'cb', text: '' }).append(
+                        range(1, 8).map(function (d) {
+                            return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
+                                $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
+                                    $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
+                                ),
+                                $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
+                                $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
+                                    (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
+                                ),
+                                $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
+                                    $('<div>', { id: '', class: '', text: '686K views .' }),
+                                    $('<div>', { id: '', class: '', text: '1 week ago' }),
+                                ),
+                            )
+                        }),
                     ),
-                    //khối 6
-                    $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
-                        // paddingBottom: "100px"
-                    }).append(
-                        $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Popular Channels' }),
-                        $('<div>', { id: '', class: 'cb', text: '' }).append(
-                            range(1, 6).map(function (d) {
-                                return $('<div>', { id: '', class: 'col-md-2 col-sm-4 col-xs-6 plr15 mb25', text: '' }).append(
-                                    $('<div>', { id: '', class: 'img-34 pr', text: '' }),
-                                    $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'BattleState ' + d }),
-                                    $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: '235' + d + 'K Followers' }).append(
-                                        (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
-                                    ),
-                                )
-                            }),
-                        ),
+                ),
+                //khối 6
+                $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
+                    // paddingBottom: "100px"
+                }).append(
+                    $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Popular Channels' }),
+                    $('<div>', { id: '', class: 'cb', text: '' }).append(
+                        range(1, 6).map(function (d) {
+                            return $('<div>', { id: '', class: 'col-md-2 col-sm-4 col-xs-6 plr15 mb25', text: '' }).append(
+                                $('<div>', { id: '', class: 'img-34 pr', text: '' }),
+                                $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'BattleState ' + d }),
+                                $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: '235' + d + 'K Followers' }).append(
+                                    (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
+                                ),
+                            )
+                        }),
                     ),
-                ).hoverB({
-                    hướng: "right",
-                    từ: "0px",
-                    đến: "10px",
-                    // left: "100%",
-                    đốiTượng: ".videoFake",
-                    nộiDung: $('<div>', { id: '', class: 'thờiGian bgc05 pa t0 r0 mt10 o0 ta5 cf bra3 pa5 fas fa-clock', text: '' })
-                })
-            };
+                ),
+            ).hoverB({
+                hướng: "right",
+                từ: "0px",
+                đến: "10px",
+                // left: "100%",
+                đốiTượng: ".videoFake",
+                nộiDung: $('<div>', { id: '', class: 'thờiGian bgc05 pa t0 r0 mt10 o0 ta5 cf bra3 pa5 fas fa-clock', text: '' })
+            })
+        };
         this.khởiTạo = function () {
             $("body").prepend(
                 $('<div>', { id: '', class: '', text: '' }).append(
@@ -576,5 +605,5 @@ $(document).ready(function () {
             )
         }
     }
-    hackton.khởiTạo();
+    hackthon.khởiTạo();
 });
