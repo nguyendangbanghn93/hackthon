@@ -250,20 +250,38 @@ $(document).ready(function () {
                         $('<div>', { id: '', class: 'far fa-comment-dots fs15 mlr10 h1 vatb', text: '' }),
                         $('<div>', { id: '', class: 'far fa-bell fs15 mlr10  h1 vatb', text: '' }),
                         $('<div>', { id: '', class: 'plr15 bấmĐc', text: 'Sigin' }).on('click', function () {
+                            $(".Banner").css({ padding: "150px 0px" }).find(".textSigIn").remove();
                             $(".bannerText").text("Sig In").removeClass("mb40").addClass("mb15").after(
-                                $('<div>', { id: '', class: 'cf', text: 'Please sign in to have access to all videos and many more.' }),
+                                $('<div>', { id: '', class: 'cf textSigIn', text: 'Please sign in to have access to all videos and many more.' }),
                             )
                             $(".bannerBtn").remove();
-                            $(".Banner").css({ padding: "150px 0px" })
                             $(".content").empty().append(
-                                $('<div>', { id: '', class: 'container df jcsc pt50', text: '' }).append(
-                                    $('<div>', { id: '', class: 'col-xs-5 cb mt50', text: '' }).append(
+                                $('<div>', { id: '', class: 'container df jcsc pt50  bb1 bss bchk', text: '' }).append(
+                                    $('<div>', { id: '', class: 'col-md-4 col-sm-8 col-xs-12 cb mt50', text: '' }).append(
                                         $('<div>', { id: '', class: 'df jcsc', text: '' }).append(
-                                            $('<div>', { id: '', class: 'bgpc bgrn img ml25 bấmĐc' }).css({
+                                            $('<div>', { id: '', class: 'bgpc bgrn img ml25 mb15' }).css({
                                                 backgroundImage: "url('img/logo.png')",
                                                 width: "70px",
                                                 height: "21px"
                                             }),
+                                        ),
+                                        $('<div>', { id: '', class: 'tac fwb c9 fs12', text: 'Log into your Oren account' }),
+                                        $('<div>', { id: '', class: 'mt40 tal bb1 bss bchk', text: '' }).append(
+                                            $('<input>', { id: '', class: 'w1 bra5 on mb30', placeholder: 'Username' }).css({ height: "38px" }),
+                                            $('<input>', { id: '', class: 'w1 bra5 on mb30', placeholder: 'Password' }).css({ height: "38px" }),
+                                            $('<div>', { id: '', class: 'dibc mb30', text: '' }).append(
+                                                $('<input>', { type: 'checkbox', class: ' bra5 on bấmĐc vas mr25', text: 'Remember Password' }),
+                                                $('<div>', { id: '', class: '', text: 'Remember me' }),
+                                            ),
+                                            $('<div>', { id: '', class: 'btn-ha bg0 bấmĐc w1 bra3 tac mb30', text: 'Upload' }).css({
+                                                height: "38px",
+                                                borderRadius:"5px"
+                                            }),
+                                            $('<div>',{id:'',class:'mb30 bấmĐc c3 chk1h ta5',text:'Forgot password?'}),
+                                        ),
+                                        $('<div>',{id:'',class:'dibc ptb50 fwb mb15',text:''}).append(
+                                            $('<div>',{id:'',class:'c6',text:'Don’t have an account?'}),
+                                            $('<div>',{id:'',class:'ml5 bấmĐc c0 chk1h ta5',text:' Signup here.'}),
                                         ),
                                     ),
                                 ),
