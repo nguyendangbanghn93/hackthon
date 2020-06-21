@@ -1,123 +1,100 @@
 $(document).ready(function () {
-    function cl(a, b, c) {
-        (a || a == 0) && console.log(a);
-        (b || b == 0) && console.log(b);
-        (c || c == 0) && console.log(c);
-    }
-    function range(a, b) {
-        var c = [];
-        for (i = a; i <= b; i++) {
-            c.push(i)
+    hackton = new function () {
+        function cl(a, b, c) {
+            (a || a == 0) && console.log(a);
+            (b || b == 0) && console.log(b);
+            (c || c == 0) && console.log(c);
         }
-        return c;
-    }
-    function iconMenu(o, text) {
-        return $('<div>', { id: '', class: '', text: '' }).append(
-            text && $('<div>', { id: '', class: 'df mb25', text: 'LIBRARY' }),
-            o.map(function (d, i) {
-                return $('<div>', { id: '', class: 'df mb25 bấmĐc', text: '' }).append(
-                    $('<div>', { id: '', class: 'w20', text: '' }).append(
-                        $('<div>', { id: '', class: d.i + " fs11 c08 chk1h ta5", text: '' }),
-                    ),
-                    $('<div>', { id: '', class: 'w60 c08 chk1h ta5', text: d.t }),
-                    d.n && $('<div>', { id: '', class: 'w20 tar pr10', text: d.n }),
-                    d.e ?? ""
-                )
-            })
-        )
-    }
-    $.fn.extend({
-        hoverB: function (o) {
-            o = $.extend({
-                hướng: "bottom", //top, left, right
-                từ: "150%",
-                đến: "100%",
-                left: "",
-                right: "",
-                top: "",
-                bottom: "",
-                thờiGian: 500,
-                đốiTượng: false,
-                nộiDung: $('<div>', { id: '', class: 'pa bgcf pa5', text: 'điền nội dung vào đây' }),
-            }, o)
-            return this.each(function () {
-                var t = $(this), css1, css2;
-                o.nộiDung.css({ position: "absolute" })
-                switch (o.hướng) {
-                    case "bottom":
-                        css1 = {
-                            top: o.từ,
-                            bottom: o.bottom,
-                            left: o.left ?? "",
-                            right: o.right ?? "",
-                            opacity: 0
-                        };
-                        css2 = {
-                            top: o.đến,
-                            bottom: o.bottom,
-                            left: o.left ?? "",
-                            right: o.right ?? "",
-                            opacity: 1
-                        }
-                        break;
-                    case "right":
-                        css1 = {
-                            top: o.top ?? "",
-                            bottom: o.bottom,
-                            left: o.left ?? "",
-                            right: o.từ,
-                            opacity: 0
-                        };
-                        css2 = {
-                            top: o.top ?? "",
-                            bottom: o.bottom,
-                            left: o.left ?? "",
-                            right: o.đến,
-                            opacity: 1
-                        }
-                        break;
-                }
-                o.nộiDung.addClass("chờXóa");
-                t.on("mouseenter", o.đốiTượng, function () {
-                    var t = $(this);
-                    t.append(
-                        o.nộiDung.css(css1)
+        function range(a, b) {
+            var c = [];
+            for (i = a; i <= b; i++) {
+                c.push(i)
+            }
+            return c;
+        }
+        function iconMenu(o, text) {
+            return $('<div>', { id: '', class: '', text: '' }).append(
+                text && $('<div>', { id: '', class: 'df mb25', text: 'LIBRARY' }),
+                o.map(function (d, i) {
+                    return $('<div>', { id: '', class: 'df mb25 bấmĐc', text: '' }).append(
+                        $('<div>', { id: '', class: 'w20', text: '' }).append(
+                            $('<div>', { id: '', class: d.i + " fs11 c08 chk1h ta5", text: '' }),
+                        ),
+                        $('<div>', { id: '', class: 'w60 c08 chk1h ta5', text: d.t }),
+                        d.n && $('<div>', { id: '', class: 'w20 tar pr10', text: d.n }),
+                        d.e ?? ""
                     )
-
-                    setTimeout(function () {
-                        o.nộiDung.css(css2)
-                    }, 50)
-                    var event = {
-                        mouseleave: function () {
-                            o.nộiDung.css(css1)
-                            setTimeout(function () {
-                                t.find(".chờXóa").remove();
-                                t.off(event)
-                            }, o.thờiGian);
-                        }
-                    };
-                    t.on(event)
-                },
-                )
-                // t.hover(function () {
-                //     t.append(
-                //         o.nộiDung.css(css1)
-                //     )
-                //     setTimeout(function () {
-                //         o.nộiDung.css(css2)
-                //     }, 50)
-                // }, function () {
-                //     o.nộiDung.css(css1)
-                //     setTimeout(function () {
-                //         o.nộiDung.remove();
-                //     }, o.thờiGian);
-                // })
-            })
+                })
+            )
         }
-    })
-    $("body").prepend(
-        $('<div>', { id: '', class: '', text: '' }).append(
-            $('<div>', { id: 'header', class: '', text: '' }).append(
+        $.fn.extend({
+            hoverB: function (o) {
+                o = $.extend({
+                    hướng: "bottom", //top, left, right
+                    từ: "150%",
+                    đến: "100%",
+                    left: "",
+                    right: "",
+                    top: "",
+                    bottom: "",
+                    thờiGian: 500,
+                    đốiTượng: false,
+                    nộiDung: $('<div>', { id: '', class: 'pa bgcf pa5', text: 'điền nội dung vào đây' }),
+                }, o)
+                var tran = o.thờiGian / 1000 + "s";
+                return this.each(function () {
+                    var t = $(this),
+                        css1 = {
+                            top: o.top ?? "",
+                            bottom: o.bottom ?? "",
+                            left: o.left ?? "",
+                            right: o.right ?? "",
+                            opacity: 0
+                        },
+                        css2 = {
+                            top: o.top ?? "",
+                            bottom: o.bottom ?? "",
+                            left: o.left ?? "",
+                            right: o.right ?? "",
+                            opacity: 1
+                        };
+                    o.nộiDung.css({ position: "absolute", transition: tran })
+                    switch (o.hướng) {
+                        case "bottom":
+                            $.extend(css1, { top: o.từ })
+                            $.extend(css2, { top: o.đến })
+                            break;
+                        case "right":
+                            $.extend(css1, { right: o.từ })
+                            $.extend(css2, { right: o.đến })
+                            break;
+                    }
+                    o.nộiDung.addClass("chờXóa");
+                    t.on("mouseenter", o.đốiTượng, function () {
+                        var t = $(this);
+                        t.append(
+                            o.nộiDung.css(css1)
+                        )
+                        setTimeout(function () {
+                            o.nộiDung.css(css2)
+                        }, 50)
+                        var event = {
+                            mouseleave: function () {
+                                o.nộiDung.css(css1)
+                                setTimeout(function () {
+                                    t.find(".chờXóa").remove();
+                                    t.off(event)
+                                }, o.thờiGian);
+                            }
+                        };
+                        t.on(event)
+                    },
+                    )
+                })
+            }
+        })
+        var head = function () {
+            return $('<div>', { id: '', class: '', text: '' }).append(
                 //thanh 1
                 $('<div>', { id: '', class: 'thanh1 dibc ptb25 plr15 bb1 bss bchk', text: '' }).append(
                     $('<div>', { id: '', class: 'w33 dibc', text: '' }).append(
@@ -329,7 +306,7 @@ $(document).ready(function () {
                                         );
                                     if (t.find(".menuAc").length) {
                                         var g = t.find(".menuAc");
-                                        g.css({marginTop: "0px"})
+                                        g.css({ marginTop: "0px" })
                                         g.height(0);
                                         setTimeout(function () {
                                             g.remove();
@@ -340,7 +317,7 @@ $(document).ready(function () {
                                         menuAc.height(0).removeClass("o0").addClass("oh ta5");
                                         setTimeout(function () {
                                             menuAc.height(h)
-                                            menuAc.css({marginTop: "25px"})
+                                            menuAc.css({ marginTop: "25px" })
                                         })
                                     }
                                 }),
@@ -413,170 +390,166 @@ $(document).ready(function () {
                         }),
                     ),
                 ),
-            ),
-            // nội dung 
-            $('<div>', { id: '', class: 'content container', text: '' }).append(
-                //khối 1
-                $('<div>', { id: '', class: 'pt50 mt15 cb  bb1 bss bchk', text: '' }).css({
-                    paddingBottom: "100px"
-                }).append(
-                    [{
-                        img: "img/sv1.png",
-                        title: "Get paid by your fans",
-                        content: "Accept money from your fans through tips."
-                    }, {
-                        img: "img/sv2.png",
-                        title: "Grow your audience",
-                        content: "Join a growing community of young millennialaas & get new fans."
-                    }, {
-                        img: "img/sv3.png",
-                        title: "Simple transfer from YouTube",
-                        content: "Upload your videos from YouTube with an easy link copy/paste."
-                    }, {
-                        img: "img/sv4.png",
-                        title: "Make money with Amazon",
-                        content: "Extra income through Amazon Affiliates on your channel."
-                    },].map(function (v, i) {
-                        return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 ', text: '' }).append(
-                            $('<div>', { id: '', class: 'w1 df jcsc mb25', text: '' }).append(
-                                $('<div>', { id: '', class: 'w30 bấmĐc', text: '' }).append(
-                                    $('<div>', { id: '', class: 'img-11 bgsoi phóng' }).css({
-                                        backgroundImage: "url('" + v.img + "')"
-                                    }),
-                                ),
-                            ),
-                            $('<div>', { id: '', class: 'tac fs1 fwb mb15', text: v.title }),
-                            $('<div>', { id: '', class: 'tac fs1 ', text: v.content }),
-
-                        )
-                    })
-                ),
-                //khối 2
-                $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
-                    // paddingBottom: "100px"
-                }).append(
-                    $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Featured Videos' }),
-                    $('<div>', { id: '', class: 'cb', text: '' }).append(
-                        range(1, 8).map(function (d) {
-                            return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
-                                $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
-                                    $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
-                                ),
-                                $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
-                                $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
-                                    (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
-                                ),
-                                $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
-                                    $('<div>', { id: '', class: '', text: '686K views .' }),
-                                    $('<div>', { id: '', class: '', text: '1 week ago' }),
-                                ),
-                            )
-                        }),
-                    ),
-                ),
-                //khối 3
-                $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
-                    // paddingBottom: "100px"
-                }).append(
-                    $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Updates from Subscriptions' }),
-                    $('<div>', { id: '', class: 'cb', text: '' }).append(
-                        range(1, 4).map(function (d) {
-                            return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
-                                $('<div>', { id: '', class: 'cb mb25', text: '' }).append(
-                                    $('<div>', { id: '', class: 'wh50 bra50 bgc9 fl', text: '' }),
-                                    $('<div>', { id: '', class: 'df jcsb pl25', text: '' }).css({ height: "50px" }).append(
-                                        $('<div>', { id: '', class: 'h1 df fdc jcsc', text: '' }).append(
-                                            $('<div>', { id: '', class: 'fwb', text: 'Tên ' + d }),
-                                        ),
-                                        $('<div>', { id: '', class: 'h1 df fdc jcsc', text: '' }).append(
-                                            $('<div>', { id: '', class: '', text: d }),
-                                        ),
+            )
+        },
+            home = function () {
+                return $('<div>', { id: '', class: 'content container', text: '' }).append(
+                    //khối 1
+                    $('<div>', { id: '', class: 'pt50 mt15 cb  bb1 bss bchk', text: '' }).css({
+                        paddingBottom: "100px"
+                    }).append(
+                        [{
+                            img: "img/sv1.png",
+                            title: "Get paid by your fans",
+                            content: "Accept money from your fans through tips."
+                        }, {
+                            img: "img/sv2.png",
+                            title: "Grow your audience",
+                            content: "Join a growing community of young millennialaas & get new fans."
+                        }, {
+                            img: "img/sv3.png",
+                            title: "Simple transfer from YouTube",
+                            content: "Upload your videos from YouTube with an easy link copy/paste."
+                        }, {
+                            img: "img/sv4.png",
+                            title: "Make money with Amazon",
+                            content: "Extra income through Amazon Affiliates on your channel."
+                        },].map(function (v, i) {
+                            return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 ', text: '' }).append(
+                                $('<div>', { id: '', class: 'w1 df jcsc mb25', text: '' }).append(
+                                    $('<div>', { id: '', class: 'w30 bấmĐc', text: '' }).append(
+                                        $('<div>', { id: '', class: 'img-11 bgsoi phóng' }).css({
+                                            backgroundImage: "url('" + v.img + "')"
+                                        }),
                                     ),
                                 ),
-                                $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
-                                    $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
-                                ),
-                                $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
-                                $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
-                                    (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
-                                ),
-                                $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
-                                    $('<div>', { id: '', class: '', text: '686K views .' }),
-                                    $('<div>', { id: '', class: '', text: '1 week ago' }),
-                                ),
+                                $('<div>', { id: '', class: 'tac fs1 fwb mb15', text: v.title }),
+                                $('<div>', { id: '', class: 'tac fs1 ', text: v.content }),
+
                             )
-                        }),
+                        })
                     ),
-                ),
-                //khối 4
-                $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
-                    // paddingBottom: "100px"
-                }).append(
-                    $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'New Videos' }),
-                    $('<div>', { id: '', class: 'cb', text: '' }).append(
-                        range(1, 8).map(function (d) {
-                            return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
-                                $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
-                                    $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
-                                ),
-                                $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
-                                $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
-                                    (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
-                                ),
-                                $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
-                                    $('<div>', { id: '', class: '', text: '686K views .' }),
-                                    $('<div>', { id: '', class: '', text: '1 week ago' }),
-                                ),
-                            )
-                        }),
+                    //khối 2
+                    $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
+                        // paddingBottom: "100px"
+                    }).append(
+                        $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Featured Videos' }),
+                        $('<div>', { id: '', class: 'cb', text: '' }).append(
+                            range(1, 8).map(function (d) {
+                                return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
+                                    $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
+                                        $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
+                                    ),
+                                    $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
+                                    $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
+                                        (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
+                                    ),
+                                    $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
+                                        $('<div>', { id: '', class: '', text: '686K views .' }),
+                                        $('<div>', { id: '', class: '', text: '1 week ago' }),
+                                    ),
+                                )
+                            }),
+                        ),
                     ),
-                ),
-                //khối 5
-                $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
-                    // paddingBottom: "100px"
-                }).append(
-                    $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Popular Videos' }),
-                    $('<div>', { id: '', class: 'cb', text: '' }).append(
-                        range(1, 8).map(function (d) {
-                            return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
-                                $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
-                                    $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
-                                ),
-                                $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
-                                $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
-                                    (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
-                                ),
-                                $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
-                                    $('<div>', { id: '', class: '', text: '686K views .' }),
-                                    $('<div>', { id: '', class: '', text: '1 week ago' }),
-                                ),
-                            )
-                        }),
+                    //khối 3
+                    $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
+                        // paddingBottom: "100px"
+                    }).append(
+                        $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Updates from Subscriptions' }),
+                        $('<div>', { id: '', class: 'cb', text: '' }).append(
+                            range(1, 4).map(function (d) {
+                                return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
+                                    $('<div>', { id: '', class: 'cb mb25', text: '' }).append(
+                                        $('<div>', { id: '', class: 'wh50 bra50 bgc9 fl', text: '' }),
+                                        $('<div>', { id: '', class: 'df jcsb pl25', text: '' }).css({ height: "50px" }).append(
+                                            $('<div>', { id: '', class: 'h1 df fdc jcsc', text: '' }).append(
+                                                $('<div>', { id: '', class: 'fwb', text: 'Tên ' + d }),
+                                            ),
+                                            $('<div>', { id: '', class: 'h1 df fdc jcsc', text: '' }).append(
+                                                $('<div>', { id: '', class: '', text: d }),
+                                            ),
+                                        ),
+                                    ),
+                                    $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
+                                        $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
+                                    ),
+                                    $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
+                                    $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
+                                        (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
+                                    ),
+                                    $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
+                                        $('<div>', { id: '', class: '', text: '686K views .' }),
+                                        $('<div>', { id: '', class: '', text: '1 week ago' }),
+                                    ),
+                                )
+                            }),
+                        ),
                     ),
-                ),
-                //khối 6
-                $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
-                    // paddingBottom: "100px"
-                }).append(
-                    $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Popular Channels' }),
-                    $('<div>', { id: '', class: 'cb', text: '' }).append(
-                        range(1, 6).map(function (d) {
-                            return $('<div>', { id: '', class: 'col-md-2 col-sm-4 col-xs-6 plr15 mb25', text: '' }).append(
-                                $('<div>', { id: '', class: 'img-34 pr', text: '' }),
-                                $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'BattleState ' + d }),
-                                $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: '235' + d + 'K Followers' }).append(
-                                    (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
-                                ),
-                            )
-                        }),
+                    //khối 4
+                    $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
+                        // paddingBottom: "100px"
+                    }).append(
+                        $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'New Videos' }),
+                        $('<div>', { id: '', class: 'cb', text: '' }).append(
+                            range(1, 8).map(function (d) {
+                                return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
+                                    $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
+                                        $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
+                                    ),
+                                    $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
+                                    $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
+                                        (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
+                                    ),
+                                    $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
+                                        $('<div>', { id: '', class: '', text: '686K views .' }),
+                                        $('<div>', { id: '', class: '', text: '1 week ago' }),
+                                    ),
+                                )
+                            }),
+                        ),
                     ),
-                ),
-                $('<div>', { id: '', class: 'tac ', text: '' }).css({ padding: "70px 0" }).append(
-                    $('<div>', { id: '', class: 'far fa-caret-square-up fs12 chk1h ta5 bấmĐc', text: '' }).on("click", function () {
-                        $("html, body").animate({ scrollTop: 0 }, "slow");
-                    }),
-                ),
-            ).hoverB({
+                    //khối 5
+                    $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
+                        // paddingBottom: "100px"
+                    }).append(
+                        $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Popular Videos' }),
+                        $('<div>', { id: '', class: 'cb', text: '' }).append(
+                            range(1, 8).map(function (d) {
+                                return $('<div>', { id: '', class: 'col-md-3 col-sm-6 plr15 mb25', text: '' }).append(
+                                    $('<div>', { id: '', class: 'img-85 videoFake pr', text: '' }).append(
+                                        $('<div>', { id: '', class: 'pa b0 r0 bgc0 bra3 cf fs09 pa3', text: '12:5' + d }),
+                                    ),
+                                    $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'Kingdom Come: Deliverance Funny Moments and Fails ' + d }),
+                                    $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: 'newfox media' }).append(
+                                        (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
+                                    ),
+                                    $('<div>', { id: '', class: 'dibc fs09 c07 lh16', text: '' }).append(
+                                        $('<div>', { id: '', class: '', text: '686K views .' }),
+                                        $('<div>', { id: '', class: '', text: '1 week ago' }),
+                                    ),
+                                )
+                            }),
+                        ),
+                    ),
+                    //khối 6
+                    $('<div>', { id: '', class: 'pt50 pt30 cb  bb1 bss bchk', text: '' }).css({
+                        // paddingBottom: "100px"
+                    }).append(
+                        $('<div>', { id: '', class: 'fs11 fwb mb25 plr15', text: 'Popular Channels' }),
+                        $('<div>', { id: '', class: 'cb', text: '' }).append(
+                            range(1, 6).map(function (d) {
+                                return $('<div>', { id: '', class: 'col-md-2 col-sm-4 col-xs-6 plr15 mb25', text: '' }).append(
+                                    $('<div>', { id: '', class: 'img-34 pr', text: '' }),
+                                    $('<div>', { id: '', class: 'fwb mt25  t2l', text: 'BattleState ' + d }),
+                                    $('<div>', { id: '', class: 'fs09 mt15 c07 lh16 pr', text: '235' + d + 'K Followers' }).append(
+                                        (d == 2 || d == 7) && $('<div>', { id: '', class: 'fas fa-check ml10 chk1', text: '' }),
+                                    ),
+                                )
+                            }),
+                        ),
+                    ),
+                ).hoverB({
                     hướng: "right",
                     từ: "0px",
                     đến: "10px",
@@ -584,6 +557,24 @@ $(document).ready(function () {
                     đốiTượng: ".videoFake",
                     nộiDung: $('<div>', { id: '', class: 'thờiGian bgc05 pa t0 r0 mt10 o0 ta5 cf bra3 pa5 fas fa-clock', text: '' })
                 })
-        )
-    )
+            };
+        this.khởiTạo = function () {
+            $("body").prepend(
+                $('<div>', { id: '', class: '', text: '' }).append(
+                    $('<div>', { id: '', class: 'head', text: '' }).append(
+                        head
+                    ),
+                    $('<div>', { id: '', class: 'content', text: '' }).append(
+                        home
+                    ),
+                    $('<div>', { id: '', class: 'tac ', text: '' }).css({ padding: "70px 0" }).append(
+                        $('<div>', { id: '', class: 'far fa-caret-square-up fs12 chk1h ta5 bấmĐc', text: '' }).on("click", function () {
+                            $("html, body").animate({ scrollTop: 0 }, "slow");
+                        }),
+                    ),
+                )
+            )
+        }
+    }
+    hackton.khởiTạo();
 });
